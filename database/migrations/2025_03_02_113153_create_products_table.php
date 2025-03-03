@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
             $table->integer('stock_quantity')->default(0);
             $table->boolean('is_available')->default(true);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            //$table->foreignId('category_id')->constrained('categories');
+            $table->foreignId('category_id')->constrained('categories');
 
         });
     }
