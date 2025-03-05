@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Catalog\CatalogController;
+use App\Http\Controllers\Register\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +19,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/catalog', [CatalogController::class, 'show'])->name('catalog');
+Route::get('/registration', [RegisterController::class, 'show'])->name('register');

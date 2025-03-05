@@ -2131,9 +2131,21 @@ textarea.input {
   margin: 15px 0px;
 }
 
-/*=========================================================
-	13 -> RESPONSIVE
-===========================================================*/
+
+.register .section-title{
+    text-align: center;
+}
+
+.register form{
+    margin: 0 auto;
+    width: 40%;
+    padding: 30px 0 30px 0;
+}
+.register form .form-group{
+    margin-bottom: 30px;
+}                                                     /*=========================================================
+                                                         13 -> RESPONSIVE
+                                                     ===========================================================*/
 
 @media only screen and (max-width: 1201px) {}
 
