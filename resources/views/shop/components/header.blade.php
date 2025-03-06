@@ -49,7 +49,7 @@
             <ul class="header-links pull-right">
                 <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
                 @if (Auth::check())
-                <li><a href="/logout"><i class="fa fa-user-o"></i>Вихій</a></li>
+                    <li><a href="/login"><i class="fa fa-user-o"></i>В кабінет</a>   <span style="color: white">/</span>   <a href="/logout">Вихід</a></li>
                 @else
                 <li><a href="/login"><i class="fa fa-user-o"></i> Мій акаунт</a></li>
                 @endif
