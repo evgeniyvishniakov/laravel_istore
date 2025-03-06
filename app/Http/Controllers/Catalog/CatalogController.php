@@ -8,6 +8,7 @@ class CatalogController extends Controller
 {
     public function show()
     {
+
         return view('shop.catalog');
     }
 }

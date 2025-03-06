@@ -2131,9 +2131,18 @@ textarea.input {
   margin: 15px 0px;
 }
 
-
+.register-link{
+    padding: 15px 0;
+}
+.register-link  a{
+    font-size: 18px;
+    color: #D10024;
+    letter-spacing: 0.4px;
+}
 .register .section-title{
     text-align: center;
+    display: grid;
+    margin-bottom: 0!important;
 }
 
 .register form{
@@ -2143,7 +2152,20 @@ textarea.input {
 }
 .register form .form-group{
     margin-bottom: 30px;
-}                                                     /*=========================================================
+}
+.pass{
+    position: relative;
+}
+.icon-pass{
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    cursor: pointer;
+}
+
+/*=========================================================
+
+
                                                          13 -> RESPONSIVE
                                                      ===========================================================*/
 

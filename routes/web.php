@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Catalog\CatalogController;
-use App\Http\Controllers\Register\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,5 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+Route::match(['get', 'post'], '/registrations', [RegisterController::class, 'add'])->name('register');
+Route::match(['get', 'post'], '/login', [LoginController::class, 'login'])->name('login');
 Route::get('/catalog', [CatalogController::class, 'show'])->name('catalog');
-Route::get('/registration', [RegisterController::class, 'show'])->name('register');
