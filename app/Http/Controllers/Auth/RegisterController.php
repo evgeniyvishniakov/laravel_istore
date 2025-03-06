@@ -17,7 +17,6 @@ class RegisterController extends Controller
         $password = $request->input('password');
         $confirmation = $request->input('password_confirmation');
         $message = '';
-        $button = $request->input('register');
 
 
         if (User::emailExists($email)) {

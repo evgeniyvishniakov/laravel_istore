@@ -100,6 +100,7 @@
 
 <script>
 
+
     const inputPass = document.getElementById('password');
     const iconPass = document.getElementById('icon-pass');
 
@@ -111,6 +112,8 @@
 
         }
     });
+
+
 
 </script>
 

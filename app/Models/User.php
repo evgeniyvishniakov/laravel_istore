@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -28,6 +28,12 @@ class User extends Model
     public static function emailExists($email)
     {
         return self::where('email', $email)->exists();
+    }
+    public static function passExists($password)
+    {
+        $password = Hash::make($password);
+
+        return self::where('password', $password)->exists();
     }
 
 

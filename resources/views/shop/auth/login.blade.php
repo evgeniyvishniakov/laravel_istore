@@ -19,6 +19,9 @@
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" class="input" placeholder="Введите email"
                            value=" @if (!empty($email)){{ $email  }} @endif" required>
+                    @if (!empty($error_email))
+                        <p style="color: red">{{ $error_email }}</p>
+                    @endif
                 </div>
                 <!-- Поле password -->
                 <div class="form-group pass" id="pass">
@@ -35,8 +38,8 @@
                            required>
 
                     <!-- акаунт не существует -->
-                    @if (!empty($message_email))
-                        <p style="color: red">{{ $message_email }}</p>
+                    @if (!empty($error_pass))
+                        <p style="color: red">{{ $error_pass }}</p>
                     @endif
 
                 </div>

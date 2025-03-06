@@ -2163,6 +2163,50 @@ textarea.input {
     cursor: pointer;
 }
 
+
+.sidebar-account {
+    width: 250px;
+    background-color: #2f4f4f;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.sidebar-account h2 {
+    margin-top: 0;
+    font-size: 24px;
+}
+.sidebar-account ul {
+    list-style: none;
+    padding: 0;
+}
+.sidebar-account ul li {
+    margin: 20px 0;
+    cursor: pointer;
+    font-size: 18px;
+}
+.sidebar-account ul li:hover {
+    background-color: #3a6464;
+    padding-left: 10px;
+    transition: 0.3s;
+}
+/* Контент */
+.sidebar-account .content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #fff;
+    box-sizing: border-box;
+    display: none;
+}
+.sidebar-account .content.active {
+    display: block;
+}
+.sidebar-account .content h3 {
+    margin-top: 0;
+}
+.sidebar-account .content p {
+    font-size: 18px;
+}
+
 /*=========================================================
 
 
