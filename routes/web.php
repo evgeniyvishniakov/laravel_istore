@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\Account\AccountController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Catalog\CatalogController;
+use App\Http\Controllers\admin\Category\CategoryController;
+use App\Http\Controllers\admin\Home\HomeController;
+use App\Http\Controllers\shop\Account\AccountController;
+use App\Http\Controllers\shop\Auth\LoginController;
+use App\Http\Controllers\shop\Auth\RegisterController;
+use App\Http\Controllers\shop\Catalog\CatalogController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,10 +19,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 
 
@@ -33,3 +35,11 @@ Route::get('/logout', function () {
     Auth::logout();
     return redirect()->route('login');
 })->name('logout');
+
+
+Route::resource('admin-panel/category', CategoryController::class);
+Route::get('/admin-panel', [HomeController::class, 'show'])->name('admin');
+Route::get('/admin-panel/category', [CategoryController::class, 'index'])->name('category.index');
+Route::delete('/admin-panel/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+Route::get('/admin-panel/category/create', [CategoryController::class, 'create'])->name('category.create');
+Route::post('/admin-panel/category', [CategoryController::class, 'store'])->name('category.store');

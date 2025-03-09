@@ -29,13 +29,6 @@ class User extends Authenticatable
     {
         return self::where('email', $email)->exists();
     }
-    public static function passExists($password)
-    {
-        $password = Hash::make($password);
-
-        return self::where('password', $password)->exists();
-    }
-
 
     public static function addUsers($email, $password)
     {
