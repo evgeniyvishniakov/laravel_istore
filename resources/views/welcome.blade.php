@@ -1,4 +1,4 @@
-@extends('shop/components/layout')
+@extends('shop.components.layout')
 
 
 
