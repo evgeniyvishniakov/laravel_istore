@@ -20,13 +20,12 @@ class CategoryController extends Controller
     }
     public function create() //Откытие странициа создания категории
     {
-        return view('admin.category.edit');
+        return view('admin.category.create');
 
     }
 
     public function store(Request $request) //Cоздание категорий
     {
-        $timestamps = false;
 
         $request->validate([
             'name' => 'required|string|max:255',
@@ -42,14 +41,27 @@ class CategoryController extends Controller
         return redirect()->route('category.index')->with('success', 'Категорія успішно додана!');
 
     }
-    public function edit() //Откытие страници редактирования категории
+    public function edit($slug) //Откытие страници редактирования категории
     {
+        $category = Category::where('slug', $slug)->firstOrFail(); // Найти категорию по ID
 
+        return view('admin.category.edit', compact('category'));
 
     }
-    public function update() //Редактирование категорий
+    public function update(Request $request, $slug) //Редактирование категорий
     {
 
+        $category = Category::where('slug', $slug)->firstOrFail();
+
+
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'slug' => 'required|unique:categories,slug,' . $category->id,
+        ]);
+
+        $category->update($validatedData);
+
+        return redirect()->route('category.index')->with('success', 'Категорія успішно оновлена!');
     }
     public function destroy($id) //Удаление категории1
     {

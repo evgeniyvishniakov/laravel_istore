@@ -12,10 +12,10 @@
                     <a href=""> <i class="fa fa-list-ul menu-icon"></i>Список товарів </a>
                 </li>
                 <li>
-                    <a href="/admin-panel/category"> <i class="fa fa-list-ul menu-icon"></i>Категорії </a>
+                    <a href="{{ route('category.index') }}"> <i class="fa fa-list-ul menu-icon"></i>Категорії </a>
                 </li>
                 <li>
-                    <a href=""> <i class="fa fa-list-ul menu-icon"></i>Атрибути </a>
+                    <a href="{{ route('attribute.index') }}"> <i class="fa fa-list-ul menu-icon"></i>Атрибути </a>
                 </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Components</a>

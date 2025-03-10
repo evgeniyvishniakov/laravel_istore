@@ -24,7 +24,9 @@
 <script src="{{ asset('admin/js/init/fullcalendar-init.js')  }}"></script>
 
 <!--Local Stuff-->
+
 <script>
+
     jQuery(document).ready(function($) {
         "use strict";
 

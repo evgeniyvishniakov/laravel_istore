@@ -38,10 +38,10 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Список категорій</strong>
+                            <strong class="card-title">Список атрибутів</strong>
                         </div>
                     </div>
-                    <a href="{{ route('category.create') }}" class="btn btn-success" >Додати категорію</a>
+                    <a href="{{ route('attribute.create') }}" class="btn btn-success" >Додати атрибут</a>
                     @if(session('success'))
                         <div class="alert alert-success" role="alert">
                             {{ session('success') }}
@@ -60,13 +60,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($categories as $category)
+                                @foreach($attributes as $attribute)
                                 <tr>
-                                    <td>{{ $category['name'] }}</td>
+                                    <td>{{ $attribute['name'] }}</td>
                                     <td>20</td>
-                                    <td>{{ $category['slug'] }}</td>
-                                    <td><a class="btn btn-info" href="{{ route('category.edit', $category->slug) }}">Змінити</a></td>
-                                    <td><form action="{{ route('category.destroy', $category->id) }}" method="POST" onsubmit="return confirm('Удалить категорию?');">
+                                    <td>{{ $attribute['slug'] }}</td>
+                                    <td><a class="btn btn-info" href="{{ route('attribute.edit', $attribute->slug) }}">Змінити</a></td>
+                                    <td><form action="{{ route('attribute.destroy', $attribute->id) }}" method="POST" onsubmit="return confirm('Видалити атрибут?');">
                                             @csrf <!-- Токен безопасности -->
                                             @method('DELETE') <!-- Имитация DELETE-запроса -->
                                             <button class="btn btn-danger" type="submit">Видалити</button>

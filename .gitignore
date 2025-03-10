@@ -1,15 +1,41 @@
+# .gitignore for Laravel
+
+# Laravel / PHPStorm / IDE specific
+/vendor
 /node_modules
-/public/hot
 /public/storage
 /storage/*.key
-/vendor
-.env
-.env.backup
-.phpunit.result.cache
-docker-compose.override.yml
-Homestead.json
-Homestead.yaml
-npm-debug.log
-yarn-error.log
 /.idea
 /.vscode
+
+# Laravel specific
+.env
+.phpunit.result.cache
+Homestead.yaml
+Homestead.json
+.env.local
+.env.*.local
+
+# Composer
+/composer.lock
+
+# PHPUnit
+phpunit.xml
+phpunit.xml.dist
+
+# Nginx logs
+/nginx/logs
+
+# Temporary files
+*.log
+*.bak
+*.swp
+*.swo
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# IDE and editor folders
+.idea/
+.vscode/
