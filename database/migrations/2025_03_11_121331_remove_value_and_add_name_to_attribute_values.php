@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSlugToAttributesTable extends Migration
+class RemoveValueAndAddNameToAttributeValues extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddSlugToAttributesTable extends Migration
      */
     public function up()
     {
-        Schema::table('attributes', function (Blueprint $table) {
-            $table->string('slug')->nullable();  // Добавляем поле slug
+        Schema::table('attribute_values', function (Blueprint $table) {
+            $table->dropColumn('value'); // Удаляем столбец value
+            $table->string('name'); // Добавляем новый столбец name
         });
     }
 
@@ -25,7 +26,7 @@ class AddSlugToAttributesTable extends Migration
      */
     public function down()
     {
-        Schema::table('attributes', function (Blueprint $table) {
+        Schema::table('attribute_values', function (Blueprint $table) {
             //
         });
     }

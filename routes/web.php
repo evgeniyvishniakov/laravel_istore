@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\Attribute\AttributeController;
+use App\Http\Controllers\admin\AttributeValue\AttributeValueController;
 use App\Http\Controllers\admin\Category\CategoryController;
 use App\Http\Controllers\admin\Home\HomeController;
 use App\Http\Controllers\shop\Account\AccountController;
@@ -37,14 +38,14 @@ Route::get('/logout', function () {
     return redirect()->route('login');
 })->name('logout');
 
-
+Route::get('/admin-panel', [HomeController::class, 'show'])->name('admin');
 Route::resource('admin-panel/category', CategoryController::class);
-//Route::get('/admin-panel', [HomeController::class, 'show'])->name('admin');
+
 //Route::get('/admin-panel/category', [CategoryController::class, 'index'])->name('category.index');
 //Route::delete('/admin-panel/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
 //Route::get('/admin-panel/category/create', [CategoryController::class, 'create'])->name('category.create');
 //Route::post('/admin-panel/category', [CategoryController::class, 'store'])->name('category.store');
 //Route::get('/admin-panel/category/{slug}/edit', [CategoryController::class, 'edit'])->name('category.edit');
 
-
 Route::resource('admin-panel/attribute', AttributeController::class);
+Route::post('admin-panel/attribute/{id}', [AttributeValueController::class, 'store'])->name('attribute.value.store');
