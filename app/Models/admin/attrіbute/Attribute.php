@@ -18,4 +18,8 @@ class Attribute extends Model
         $this->attributes['slug'] = Str::slug($value);
         $this->attributes['name'] = $value;  // Сохраняем name
     }
+    public function attributeValues()
+    {
+        return $this->hasMany(AttributeValue::class);
+    }
 }

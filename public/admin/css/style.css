@@ -146,6 +146,25 @@ Googel Fonts  */
 }
 .navbar-header{
     display: flex;
+
+}
+
+.create{
+    padding-top: 0!important;
+    padding-left: 0!important;
+}
+.create_card-header h2 {
+    font-size: 16px;
+    font-weight: bold ;
+}
+.attr_a{
+    color: dodgerblue;
+    font-weight: 600;
+}
+.attr_a:hover{
+    color: dodgerblue;
+    text-decoration: underline;
+
 }
 
 .alert-success{

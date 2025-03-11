@@ -62,7 +62,7 @@
                                 <tbody>
                                 @foreach($attributes as $attribute)
                                 <tr>
-                                    <td>{{ $attribute['name'] }}</td>
+                                    <td><a class="attr_a" href="{{ route('attribute.index') }}/{{ $attribute['id'] }}">{{ $attribute['name'] }}</a></td>
                                     <td>20</td>
                                     <td>{{ $attribute['slug'] }}</td>
                                     <td><a class="btn btn-info" href="{{ route('attribute.edit', $attribute->slug) }}">Змінити</a></td>
