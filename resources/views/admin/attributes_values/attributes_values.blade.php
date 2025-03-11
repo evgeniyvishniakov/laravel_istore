@@ -108,8 +108,8 @@
                                         <tr>
                                             <td>{{ $value['name'] }}</td>
                                             <td>{{ $value['slug'] }}</td>
-                                            <td><a class="btn btn-info" href="{{ route('attribute.edit', $value->slug) }}">Змінити</a></td>
-                                            <td><form action="{{ route('attribute.destroy', $value->id) }}" method="POST" onsubmit="return confirm('Видалити атрибут?');">
+                                            <td><a class="btn btn-info" href="{{ route('attribute.value.edit', ['attribute_slug' => $attribute->slug, 'value_slug' => $value->slug]) }}">Змінити</a></td>
+                                            <td><form action="{{ route('attribute.value.destroy', ['attribute' => $attribute->id, 'value' => $value->id]) }}" method="POST" onsubmit="return confirm('Видалити атрибут?');">
                                                     @csrf <!-- Токен безопасности -->
                                                     @method('DELETE') <!-- Имитация DELETE-запроса -->
                                                     <button class="btn btn-danger" type="submit">Видалити</button>

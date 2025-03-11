@@ -20,6 +20,6 @@ class AttributeValue extends Model
     // Связь с атрибутами (если есть таблица attributes)
     public function attribute()
     {
-        return $this->belongsTo(\App\Models\admin\attrіbute\Attribute::class);
+        return $this->belongsTo(Attribute::class, 'attribute_id');
     }
 }

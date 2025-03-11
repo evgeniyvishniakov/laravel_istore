@@ -49,3 +49,6 @@ Route::resource('admin-panel/category', CategoryController::class);
 
 Route::resource('admin-panel/attribute', AttributeController::class);
 Route::post('admin-panel/attribute/{id}', [AttributeValueController::class, 'store'])->name('attribute.value.store');
+Route::get('admin-panel/attribute/{attribute_slug}/value/{value_slug}/edit', [AttributeValueController::class, 'edit'])->name('attribute.value.edit');
+Route::delete('/admin-panel/attribute/{attribute}/{value}', [AttributeValueController::class, 'destroy'])->name('attribute.value.destroy');
+Route::put('admin-panel/attribute/{attribute_id}/value/{value_id}/', [AttributeValueController::class, 'update'])->name('attribute.value.update');
