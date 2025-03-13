@@ -148,7 +148,9 @@ Googel Fonts  */
     display: flex;
 
 }
-
+.attribute-pair{
+    margin-bottom: 10px;
+}
 .create{
     padding-top: 0!important;
     padding-left: 0!important;

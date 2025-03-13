@@ -6,193 +6,287 @@
     <div class="content">
         <div class="animated fadeIn">
             <div class="row">
-                <div class="col-md-6 offset-md-2 col-sm-2">
+                <div class="col-md-4 col-lg-2 col-sm-4"> </div>
+                <div class="col-md-6 col-lg-7 col-sm-6">
                     <div class="card">
                         <div class="card-header">
-                            <h2>Створення категорії</h2>
+                            <h2>Створення товару</h2>
                         </div>
                         <div class="card-body card-block">
-                            <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
+                            <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                @csrf
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Text Input</label></div>
-                                    <div class="col-12 col-md-9"><input type="text" id="text-input" name="text-input" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Email Input</label></div>
-                                    <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="Enter Email" class="form-control"><small class="help-block form-text">Please enter your email</small></div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3"><label for="password-input" class=" form-control-label">Password</label></div>
-                                    <div class="col-12 col-md-9"><input type="password" id="password-input" name="password-input" placeholder="Password" class="form-control"><small class="help-block form-text">Please enter a complex password</small></div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">Disabled Input</label></div>
-                                    <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="Disabled" disabled="" class="form-control"></div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Textarea</label></div>
-                                    <div class="col-12 col-md-9"><textarea name="textarea-input" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea></div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3"><label for="select" class=" form-control-label">Select</label></div>
+                                    <div class="col col-md-3">
+                                        <label for="name" class=" form-control-label">Назва</label>
+                                    </div>
                                     <div class="col-12 col-md-9">
-                                        <select name="select" id="select" class="form-control">
-                                            <option value="0">Please select</option>
-                                            <option value="1">Option #1</option>
-                                            <option value="2">Option #2</option>
-                                            <option value="3">Option #3</option>
-                                        </select>
+                                        <input type="text" value="{{ old('name') }}" id="name" name="name"  class="form-control">
                                     </div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="selectLg" class=" form-control-label">Select Large</label></div>
+                                    <div class="col col-md-3">
+                                        <label for="desc" class=" form-control-label">Опис</label>
+                                    </div>
                                     <div class="col-12 col-md-9">
-                                        <select name="selectLg" id="selectLg" class="form-control-lg form-control">
-                                            <option value="0">Please select</option>
-                                            <option value="1">Option #1</option>
-                                            <option value="2">Option #2</option>
-                                            <option value="3">Option #3</option>
-                                        </select>
+                                        <textarea name="desc" id="desc" rows="9" class="form-control"></textarea>
                                     </div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="selectSm" class=" form-control-label">Select Small</label></div>
+                                    <div class="col col-md-3">
+                                        <label for="short_desc" class=" form-control-label">Короткий опис</label>
+                                    </div>
                                     <div class="col-12 col-md-9">
-                                        <select name="selectSm" id="selectSm" class="form-control-sm form-control">
-                                            <option value="0">Please select</option>
-                                            <option value="1">Option #1</option>
-                                            <option value="2">Option #2</option>
-                                            <option value="3">Option #3</option>
-                                            <option value="4">Option #4</option>
-                                            <option value="5">Option #5</option>
-                                        </select>
+                                        <textarea name="short_desc" id="desc" rows="9" class="form-control"></textarea>
                                     </div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="disabledSelect" class=" form-control-label">Disabled Select</label></div>
+                                    <div class="col col-md-3">
+                                        <label for="sku" class=" form-control-label">SKU</label>
+                                    </div>
                                     <div class="col-12 col-md-9">
-                                        <select name="disabledSelect" id="disabledSelect" disabled="" class="form-control">
-                                            <option value="0">Please select</option>
-                                            <option value="1">Option #1</option>
-                                            <option value="2">Option #2</option>
-                                            <option value="3">Option #3</option>
+                                        <input type="text" id="sku" name="sku" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="price" class=" form-control-label">Ціна</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="number"  id="price" name="price" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="sale" class=" form-control-label">Ціна зі знижкою</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="number"  id="sale" name="sale" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="qnt" class=" form-control-label">Кількість</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="number" id="qnt" name="qnt" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="select" class=" form-control-label">Категорія</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <select name="category_id" id="select" class="form-control">
+                                            <option value="0">Оберіть категорію</option>
+                                            @foreach( $categories as $category )
+                                            <option value="{{ $category['id']  }}">{{ $category['name']  }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="multiple-select" class=" form-control-label">Multiple select</label></div>
-                                    <div class="col col-md-9">
-                                        <select name="multiple-select" id="multiple-select" multiple="" class="form-control">
-                                            <option value="1">Option #1</option>
-                                            <option value="2">Option #2</option>
-                                            <option value="3">Option #3</option>
-                                            <option value="4">Option #4</option>
-                                            <option value="5">Option #5</option>
-                                            <option value="6">Option #6</option>
-                                            <option value="7">Option #7</option>
-                                            <option value="8">Option #8</option>
-                                            <option value="9">Option #9</option>
-                                            <option value="10">Option #10</option>
-                                        </select>
+                                    <div class="col col-md-3">
+                                        <label class=" form-control-label">Відображення</label>
                                     </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3"><label class=" form-control-label">Radios</label></div>
-                                    <div class="col col-md-9">
-                                        <div class="form-check">
-                                            <div class="radio">
-                                                <label for="radio1" class="form-check-label ">
-                                                    <input type="radio" id="radio1" name="radios" value="option1" class="form-check-input">Option 1
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label for="radio2" class="form-check-label ">
-                                                    <input type="radio" id="radio2" name="radios" value="option2" class="form-check-input">Option 2
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label for="radio3" class="form-check-label ">
-                                                    <input type="radio" id="radio3" name="radios" value="option3" class="form-check-input">Option 3
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3"><label class=" form-control-label">Inline Radios</label></div>
-                                    <div class="col col-md-9">
-                                        <div class="form-check-inline form-check">
-                                            <label for="inline-radio1" class="form-check-label ">
-                                                <input type="radio" id="inline-radio1" name="inline-radios" value="option1" class="form-check-input">One
-                                            </label>
-                                            <label for="inline-radio2" class="form-check-label ">
-                                                <input type="radio" id="inline-radio2" name="inline-radios" value="option2" class="form-check-input">Two
-                                            </label>
-                                            <label for="inline-radio3" class="form-check-label ">
-                                                <input type="radio" id="inline-radio3" name="inline-radios" value="option3" class="form-check-input">Three
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3"><label class=" form-control-label">Checkboxes</label></div>
                                     <div class="col col-md-9">
                                         <div class="form-check">
                                             <div class="checkbox">
-                                                <label for="checkbox1" class="form-check-label ">
-                                                    <input type="checkbox" id="checkbox1" name="checkbox1" value="option1" class="form-check-input">Option 1
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label for="checkbox2" class="form-check-label ">
-                                                    <input type="checkbox" id="checkbox2" name="checkbox2" value="option2" class="form-check-input"> Option 2
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label for="checkbox3" class="form-check-label ">
-                                                    <input type="checkbox" id="checkbox3" name="checkbox3" value="option3" class="form-check-input"> Option 3
-                                                </label>
+                                                <input type="checkbox" id="checkbox1" name="visible" checked value="1" class="form-check-input">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label class=" form-control-label">Inline Checkboxes</label></div>
+                                    <div class="col col-md-3">
+                                        <label for="file-input" class=" form-control-label">Зображення</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="file" id="file-input" name="image" class="form-control-file">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="file-multiple-input" class=" form-control-label">Галерея</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="file" id="file-multiple-input" name="images" multiple="" class="form-control-file">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="slug" class=" form-control-label">Slug</label></div>
+                                    <div class="col-12 col-md-9"><input type="text" id="slug" name="slug"  class="form-control"></div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="select" class=" form-control-label">Атрибути</label>
+                                        <button id="add-attribute-pair" type="button" class="fa fa-plus-circle btn btn-primary"></button>
+                                    </div>
+                                    <!-- Кнопка "Добавить" -->
                                     <div class="col col-md-9">
-                                        <div class="form-check-inline form-check">
-                                            <label for="inline-checkbox1" class="form-check-label ">
-                                                <input type="checkbox" id="inline-checkbox1" name="inline-checkbox1" value="option1" class="form-check-input">One
-                                            </label>
-                                            <label for="inline-checkbox2" class="form-check-label ">
-                                                <input type="checkbox" id="inline-checkbox2" name="inline-checkbox2" value="option2" class="form-check-input">Two
-                                            </label>
-                                            <label for="inline-checkbox3" class="form-check-label ">
-                                                <input type="checkbox" id="inline-checkbox3" name="inline-checkbox3" value="option3" class="form-check-input">Three
-                                            </label>
+                                    <!-- Контейнер для селектов -->
+                                    <div id="attributes-container">
+                                        <!-- Ваши исходные селекты -->
+                                        <div class="attribute-pair" id="attribute-pair-1">
+                                            <div class="row">
+                                                <div class="col-6 col-md-5">
+                                                    <select id="attribute-select-1" class="form-control" name="attributes[]">
+                                                        <option value=""  >Выберите атрибут</option>
+                                                        @foreach($attributes as $attribute)
+                                                            <option value="{{ $attribute->id }}">{{ $attribute->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-6 col-md-5">
+                                                    <select id="attribute-values-select-1" class="form-control" name="values[]">
+                                                        <option value=""  >Выберите значение</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-6 col-md-2">
+                                                    <button type="button" class="fa fa-times-circle-o btn btn-danger remove-attribute-pair" data-pair-id="1"></button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                    </div>
                                 </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3"><label for="file-input" class=" form-control-label">File input</label></div>
-                                    <div class="col-12 col-md-9"><input type="file" id="file-input" name="file-input" class="form-control-file"></div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3"><label for="file-multiple-input" class=" form-control-label">Multiple File input</label></div>
-                                    <div class="col-12 col-md-9"><input type="file" id="file-multiple-input" name="file-multiple-input" multiple="" class="form-control-file"></div>
-                                </div>
+                                <button class="btn btn-success" type="submit">Створити товар</button>
                             </form>
                         </div>
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary btn-sm">
-                                <i class="fa fa-dot-circle-o"></i> Submit
-                            </button>
-                            <button type="reset" class="btn btn-danger btn-sm">
-                                <i class="fa fa-ban"></i> Reset
-                            </button>
-                        </div>
                     </div>
+                </div>
+                <div class="col-md-2 col-lg-2 col-sm-2">
+
                 </div>
             </div>
         </div>
     </div><!-- .animated -->
 @endsection
+
+@push('scripts')
+
+
+    <script>
+
+
+        $(document).ready(function() {
+            let attributeIndex = 1; // Индекс для уникальности ID
+
+            // Обработчик клика на кнопку "Добавить"
+            $('#add-attribute-pair').click(function() {
+                attributeIndex++; // Увеличиваем индекс для нового блока
+
+                // Клонируем первый блок селектов
+                const newAttributePair = $('.attribute-pair').first().clone();
+
+                // Обновляем ID для нового селекта и кнопки
+                newAttributePair.find('select#attribute-select-1')
+                    .attr('id', 'attribute-select-' + attributeIndex)
+                    .val('');
+                newAttributePair.find('select#attribute-values-select-1')
+                    .attr('id', 'attribute-values-select-' + attributeIndex)
+                    .empty()
+                    .append('<option value="">Выберите значение</option>');
+
+                // Обновляем data-pair-id для кнопки удаления
+                newAttributePair.find('.remove-attribute-pair')
+                    .attr('data-pair-id', attributeIndex);
+
+                // Обновляем id контейнера
+                newAttributePair.attr('id', 'attribute-pair-' + attributeIndex);
+
+                // Добавляем новый блок в контейнер
+                $('#attributes-container').append(newAttributePair);
+            });
+
+            // Делегирование событий: обработка удаления элемента
+            $('#attributes-container').on('click', '.remove-attribute-pair', function() {
+                const pairId = $(this).data('pair-id');
+                const remainingPairs = $('#attributes-container .attribute-pair').length;
+
+                // Проверяем, не является ли это последним элементом
+                if (remainingPairs > 1) {
+                    $('#attribute-pair-' + pairId).remove(); // Удаляем блок с селектами
+                } else {
+                    alert('Невозможно удалить последний блок');
+                }
+            });
+
+            // Делегирование событий: обработка изменений для селектов
+            $('#attributes-container').on('change', 'select[id^="attribute-select-"]', function() {
+                const attributeId = $(this).val();
+                const attributeSelectId = $(this).attr('id').split('-')[2]; // Получаем уникальный ID текущего селекта
+                const valuesSelect = $('#attribute-values-select-' + attributeSelectId); // Найдем соответствующий селект значений
+
+                if (attributeId) {
+                    $.ajax({
+                        url: '/admin-panel/product/attribute-values/' + attributeId,
+                        type: 'GET',
+                        success: function(data) {
+                            valuesSelect.empty();
+                            valuesSelect.append('<option value="">Выберите значение</option>');
+
+                            if (data.length > 0) {
+                                $.each(data, function(key, value) {
+                                    valuesSelect.append('<option value="' + value.id + '">' + value.name + '</option>');
+                                });
+                            } else {
+                                valuesSelect.append('<option value="">Нет значений для этого атрибута</option>');
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            if (xhr.status === 404) {
+                                // Выводим сообщение о том, что нет значений для данного атрибута
+                                alert(xhr.responseJSON.message);  // Это выведет сообщение 'Нет значений для данного атрибута'
+
+                                // Или выводим сообщение в элемент HTML, если вы хотите
+                                valuesSelect.empty();
+                                valuesSelect.append('<option value="">' + xhr.responseJSON.message + '</option>');
+                            } else {
+                                console.log('Ошибка AJAX: ', error);
+                            }
+                        }
+                    });
+                } else {
+                    valuesSelect.empty();
+                    valuesSelect.append('<option value="">Выберите значение</option>');
+                }
+            });
+        });
+
+
+
+        // Функция для транслитерации кириллицы в латиницу
+        function transliterate(str) {
+            var map = {
+                'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo', 'ж': 'zh', 'з': 'z', 'и': 'i', 'і': 'i', 'ї': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'kh', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'shch', 'ы': 'y', 'э': 'e', 'ю': 'yu', 'я': 'ya',
+                'А': 'A', 'Б': 'B', 'В': 'V', 'Г': 'G', 'Д': 'D', 'Е': 'E', 'Ё': 'Yo', 'Ж': 'Zh', 'З': 'Z', 'И': 'I', 'І': 'I', 'Ї': 'I', 'Й': 'Y', 'К': 'K', 'Л': 'L', 'М': 'M', 'Н': 'N', 'О': 'O', 'П': 'P', 'Р': 'R', 'С': 'S', 'Т': 'T', 'У': 'U', 'Ф': 'F', 'Х': 'Kh', 'Ц': 'Ts', 'Ч': 'Ch', 'Ш': 'Sh', 'Щ': 'Shch', 'Ы': 'Y', 'Э': 'E', 'Ю': 'Yu', 'Я': 'Ya'
+            };
+
+            return str.split('').map(function(char) {
+                return map[char] || char;
+            }).join('');
+        }
+
+        // Функция для преобразования текста в slug
+        function generateSlug(text) {
+            return transliterate(text)                // Транслитерация
+                .toLowerCase()                          // Приводим в нижний регистр
+                .replace(/[^a-z0-9\s-]/g, '')            // Убираем все ненужные символы
+                .replace(/\s+/g, '-')                    // Заменяем пробелы на дефисы
+                .replace(/-+/g, '-')                     // Убираем несколько дефисов подряд
+                .replace(/^-+/, '')                      // Убираем дефис в начале
+                .replace(/-+$/, '');                     // Убираем дефис в конце
+        }
+
+        // Обработчик события для поля 'name'
+        document.addEventListener('DOMContentLoaded', function() {
+            const nameInput = document.getElementById('name');
+            const slugInput = document.getElementById('slug');
+
+            // Когда значение в поле name изменяется, генерируем slug
+            nameInput.addEventListener('input', function() {
+                slugInput.value = generateSlug(nameInput.value);
+            });
+        });
+    </script>
+@endpush
