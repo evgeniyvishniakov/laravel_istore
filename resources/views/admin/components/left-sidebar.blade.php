@@ -9,7 +9,7 @@
                 </li>
                 <li class="menu-title">Товари</li><!-- /.menu-title -->
                 <li>
-                    <a href=""> <i class="fa fa-list-ul menu-icon"></i>Список товарів </a>
+                    <a href="{{ route('product.index') }}"> <i class="fa fa-list-ul menu-icon"></i>Список товарів </a>
                 </li>
                 <li>
                     <a href="{{ route('category.index') }}"> <i class="fa fa-list-ul menu-icon"></i>Категорії </a>

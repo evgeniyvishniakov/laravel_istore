@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\Attribute\AttributeController;
 use App\Http\Controllers\admin\AttributeValue\AttributeValueController;
 use App\Http\Controllers\admin\Category\CategoryController;
 use App\Http\Controllers\admin\Home\HomeController;
+use App\Http\Controllers\admin\Product\ProductController;
 use App\Http\Controllers\shop\Account\AccountController;
 use App\Http\Controllers\shop\Auth\LoginController;
 use App\Http\Controllers\shop\Auth\RegisterController;
@@ -48,6 +49,9 @@ Route::resource('admin-panel/category', CategoryController::class);
 //Route::get('/admin-panel/category/{slug}/edit', [CategoryController::class, 'edit'])->name('category.edit');
 
 Route::resource('admin-panel/attribute', AttributeController::class);
+Route::resource('admin-panel/product', ProductController::class);
+Route::get('admin-panel/product/attribute-values/{attribute_id}', [ProductController::class, 'getAttributeValues']);
+
 Route::post('admin-panel/attribute/{id}', [AttributeValueController::class, 'store'])->name('attribute.value.store');
 Route::get('admin-panel/attribute/{attribute_slug}/value/{value_slug}/edit', [AttributeValueController::class, 'edit'])->name('attribute.value.edit');
 Route::delete('/admin-panel/attribute/{attribute}/{value}', [AttributeValueController::class, 'destroy'])->name('attribute.value.destroy');

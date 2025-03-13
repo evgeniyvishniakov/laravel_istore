@@ -70,7 +70,7 @@ class AttributeValueController extends Controller
         // Валидация данных
         $validatedData = $request->validate([
             'name' => 'required|max:20|unique:attribute_values,name', // Проверка уникальности для поля name
-            'slug' => 'nullable|unique:attribute_values,slug',         // Проверка уникальности для поля slug
+            'slug' => 'nullable|unique:attribute_values,slug' . $value->id,         // Исключение текущей записи из проверки
         ], $messages);
 
         // Генерируем slug его из name
@@ -82,7 +82,7 @@ class AttributeValueController extends Controller
         $value->update($validatedData);
 
 
-        return redirect()->route('attribute.show', ['attribute' => $request->attribute_id])->with('success', 'Атрибут успішно змінений!');
+        return redirect()->route('attribute.show', ['attribute' => $attribute_id])->with('success', 'Атрибут успішно змінений!');
     }
 
 

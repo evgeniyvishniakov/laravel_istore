@@ -14,7 +14,6 @@ class CategoryController extends Controller
     public function index() //Вывод списка категорий
     {
         $categories = Category::all();
-        //dump($categories);
         return view('admin.category.category', ['categories' => $categories]);
 
     }
