@@ -5,6 +5,7 @@ namespace App\Models\admin\product;
 use App\Models\admin\attrіbute\Attribute;
 use App\Models\admin\attrіbute\AttributeValue;
 use App\Models\admin\category\Category;
+use App\Models\admin\product_gallery\ProductImage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -28,5 +29,9 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
+    }
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class, 'product_id');
     }
 }
