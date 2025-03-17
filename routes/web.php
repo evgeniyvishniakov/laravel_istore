@@ -51,6 +51,7 @@ Route::resource('admin-panel/category', CategoryController::class);
 Route::resource('admin-panel/attribute', AttributeController::class);
 Route::resource('admin-panel/product', ProductController::class);
 Route::get('admin-panel/product/attribute-values/{attribute_id}', [ProductController::class, 'getAttributeValues']);
+Route::get('/api/attribute-values/{attributeId}', [AttributeController::class, 'getValues']);
 
 Route::post('admin-panel/attribute/{id}', [AttributeValueController::class, 'store'])->name('attribute.value.store');
 Route::get('admin-panel/attribute/{attribute_slug}/value/{value_slug}/edit', [AttributeValueController::class, 'edit'])->name('attribute.value.edit');

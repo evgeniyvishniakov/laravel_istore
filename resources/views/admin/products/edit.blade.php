@@ -10,17 +10,18 @@
                 <div class="col-md-6 col-lg-7 col-sm-6">
                     <div class="card">
                         <div class="card-header">
-                            <h2>Створення товару</h2>
+                            <h2>Редагування товару</h2>
                         </div>
                         <div class="card-body card-block">
-                            <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                            <form action="{{ route('product.update', $product->id) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 @csrf
+                                @method('PUT')
                                 <div class="row form-group">
                                     <div class="col col-md-3">
                                         <label for="name" class=" form-control-label">Назва</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" value="{{ old('name') }}" id="name" name="name"  class="form-control">
+                                        <input type="text" value="{{ old('name', $product->name) }}" id="name" name="name"  class="form-control">
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -28,15 +29,15 @@
                                         <label for="desc" class=" form-control-label">Опис</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <textarea name="desc" id="desc" rows="9" class="form-control"></textarea>
+                                        <textarea name="desc"  id="desc" rows="9" class="form-control textarea-editor">{{ old('description', $product->description) }}</textarea>
                                     </div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3">
-                                        <label for="short_desc" class=" form-control-label">Короткий опис</label>
+                                        <label for="short_desc"  class=" form-control-label">Короткий опис</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <textarea name="short_desc" id="desc" rows="9" class="form-control"></textarea>
+                                        <textarea name="short_desc"  id="short_desc" rows="9" class="form-control textarea-editor2">{{ old('short_desc', $product->short_desc) }}</textarea>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -44,7 +45,7 @@
                                         <label for="sku" class=" form-control-label">SKU</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="sku" name="sku" class="form-control">
+                                        <input type="text"  value="{{ old('sku', $product->sku) }}" id="sku" name="sku" class="form-control">
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -52,7 +53,7 @@
                                         <label for="price" class=" form-control-label">Ціна</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="number"  id="price" name="price" class="form-control">
+                                        <input type="number" value="{{ old('price', $product->price) }}"  id="price" name="price" class="form-control">
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -60,7 +61,7 @@
                                         <label for="sale" class=" form-control-label">Ціна зі знижкою</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="number"  id="sale" name="sale" class="form-control">
+                                        <input type="number" value="{{ old('sale', $product->sale) }}"  id="sale" name="sale" class="form-control">
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -68,18 +69,20 @@
                                         <label for="qnt" class=" form-control-label">Кількість</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="number" id="qnt" name="qnt" class="form-control">
+                                        <input type="number" id="qnt" value="{{ old('qnt', $product->quantity) }}" name="qnt" class="form-control">
                                     </div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3">
-                                        <label for="select" class=" form-control-label">Категорія</label>
+                                        <label for="select" class="form-control-label">Категорія</label>
                                     </div>
                                     <div class="col-12 col-md-9">
                                         <select name="category_id" id="select" class="form-control">
                                             <option value="0">Оберіть категорію</option>
-                                            @foreach( $categories as $category )
-                                            <option value="{{ $category['id']  }}">{{ $category['name']  }}</option>
+                                            @foreach($categories as $category)
+                                                <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>
+                                                    {{ $category->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -91,7 +94,7 @@
                                     <div class="col col-md-9">
                                         <div class="form-check">
                                             <div class="checkbox">
-                                                <input type="checkbox" id="checkbox1" name="visible" checked value="1" class="form-check-input">
+                                                <input type="checkbox" id="checkbox1" name="visible" checked value="1" class="form-check-input {{ old('visible', $product->visible) ? 'checked' : '' }}">
                                             </div>
                                         </div>
                                     </div>
@@ -102,6 +105,9 @@
                                     </div>
                                     <div class="col-12 col-md-9">
                                         <input type="file" id="file-input" name="image" class="form-control-file">
+                                        <div class="card">
+                                            <img class="card-img-top" src="{{ asset('storage/' . $product->image_url) }}" alt="">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -110,11 +116,28 @@
                                     </div>
                                     <div class="col-12 col-md-9">
                                         <input type="file" id="file-multiple-input" name="images[]" multiple class="form-control-file">
+                                        <div class="cards">
+                                            <div id="image-gallery">
+                                                @foreach($product->images as $image)
+                                                    <div class="image-item" data-id="{{ $image->id }}">
+                                                        <img src="{{ asset('storage/' . $image->image_url) }}" width="100">
+                                                        <button type="button" class="remove-image" data-id="{{ $image->id }}">✖</button>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+
+                                            <!-- Скрытое поле для передачи удалённых изображений -->
+                                            <input type="hidden" name="deleted_images" id="deleted-images">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="slug" class=" form-control-label">Slug</label></div>
-                                    <div class="col-12 col-md-9"><input type="text" id="slug" name="slug"  class="form-control"></div>
+                                    <div class="col col-md-3">
+                                        <label for="slug" class=" form-control-label">Slug</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="text" value="{{ old('slug', $product->slug) }}" id="slug" name="slug" class="form-control">
+                                    </div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3">
@@ -124,32 +147,60 @@
                                     <!-- Кнопка "Добавить" -->
                                     <div class="col col-md-9">
                                     <!-- Контейнер для селектов -->
-                                    <div id="attributes-container">
-                                        <!-- Ваши исходные селекты -->
-                                        <div class="attribute-pair" id="attribute-pair-1">
-                                            <div class="row">
-                                                <div class="col-6 col-md-5">
-                                                    <select id="attribute-select-1" class="form-control" name="attributes[]">
-                                                        <option value=""  >Выберите атрибут</option>
-                                                        @foreach($attributes as $attribute)
-                                                            <option value="{{ $attribute->id }}">{{ $attribute->name }}</option>
-                                                        @endforeach
-                                                    </select>
+                                        <div id="attributes-container">
+                                            <div class="list_product_attr_value" id="list_product_attr_value">
+                                                <div class="row">
+                                                    @foreach($product->attributes as $attribute)
+                                                        <div class="attribute-pair_edit col-12" id="attribute-pair-{{ $attribute->id }}">
+                                                            <div class="row">
+                                                                <div class="col-6 col-md-5">
+                                                                    <select class="form-control">
+                                                                        <option value="{{ $attribute->id }}">{{ $attribute->name }}</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-6 col-md-5">
+                                                                    <select class="form-control" name="attributes[{{ $attribute->id }}]">
+                                                                        @foreach($attribute->values as $value)
+                                                                            <option value="{{ $value->id }}"
+                                                                                {{ isset($selectedValues[$attribute->id]) && $selectedValues[$attribute->id] == $value->id ? 'selected' : '' }}>
+                                                                                {{ $value->name }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-6 col-md-2">
+                                                                    <button type="button" class="fa fa-times-circle-o btn btn-danger remove-attribute-pair" data-delete-id="{{ $attribute->id }}"></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
                                                 </div>
-                                                <div class="col-6 col-md-5">
-                                                    <select id="attribute-values-select-1" class="form-control" name="values[]">
-                                                        <option value=""  >Выберите значение</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-6 col-md-2">
-                                                    <button type="button" class="fa fa-times-circle-o btn btn-danger remove-attribute-pair" data-pair-id="1"></button>
+                                            </div>
+                                            <!-- Ваши исходные селекты -->
+                                            <div class="attribute-pair" id="attribute-pair-1">
+                                                <div class="row">
+                                                    <div class="col-6 col-md-5">
+                                                        <select id="attribute-select-1" class="form-control" name="attributes[]">
+                                                            <option value=""  >Выберите атрибут</option>
+                                                            @foreach($attributes_edit as $attribute)
+                                                                <option value="{{ $attribute->id }}">{{ $attribute->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-6 col-md-5">
+                                                        <select id="attribute-values-select-1" class="form-control" name="values[]">
+                                                            <option value=""  >Выберите значение</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-6 col-md-2">
+                                                        <button type="button" class="fa fa-times-circle-o btn btn-danger remove-attribute-pair" data-pair-id="1"></button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    </div>
                                 </div>
-                                <button class="btn btn-success" type="submit">Створити товар</button>
+                                <button class="btn btn-success" type="submit">Редагувати товар</button>
                             </form>
                         </div>
                     </div>
@@ -167,6 +218,34 @@
 
     <script>
 
+        document.addEventListener("DOMContentLoaded", function() {
+            let deletedImages = [];
+
+            document.querySelectorAll('.remove-image').forEach(button => {
+                button.addEventListener('click', function() {
+                    let imageId = this.getAttribute('data-id');
+                    deletedImages.push(imageId); // Добавляем ID в массив
+
+                    // Убираем картинку из DOM
+                    this.parentElement.remove();
+
+                    // Записываем в скрытое поле
+                    document.getElementById('deleted-images').value = deletedImages.join(',');
+                });
+            });
+        });
+
+
+        $(document).ready(function() {
+            // Обработчик для кнопки удаления
+            $('#list_product_attr_value').on('click', '.remove-attribute-pair', function() {
+                // Получаем уникальный id пары атрибутов через data-delete-id
+                var deleteId = $(this).data('delete-id');
+
+                // Удаляем родительский блок с селектами, используя id
+                $('#attribute-pair-' + deleteId).remove();
+            });
+        });
 
         $(document).ready(function() {
             let attributeIndex = 1; // Индекс для уникальности ID

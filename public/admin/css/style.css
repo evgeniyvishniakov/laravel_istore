@@ -148,6 +148,15 @@ Googel Fonts  */
     display: flex;
 
 }
+.card-img-top{
+ width: 20%;
+}
+.card-body .card{
+    margin-top: 20px;
+}
+.attribute-pair_edit{
+    margin-bottom: 10px;
+}
 .attribute-pair{
     margin-bottom: 10px;
 }

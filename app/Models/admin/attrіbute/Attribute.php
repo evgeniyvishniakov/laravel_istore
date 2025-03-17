@@ -28,4 +28,8 @@ class Attribute extends Model
         return $this->belongsToMany(Product::class, 'attribute_product', 'attribute_id', 'product_id')
             ->withPivot('attribute_value_id');
     }
+    public function values()
+    {
+        return $this->hasMany(AttributeValue::class, 'attribute_id');
+    }
 }
