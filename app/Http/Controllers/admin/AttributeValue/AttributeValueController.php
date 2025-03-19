@@ -7,6 +7,7 @@ use App\Models\admin\attrіbute\Attribute;
 use App\Models\admin\attrіbute\AttributeValue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class AttributeValueController extends Controller
 {
@@ -24,8 +25,19 @@ class AttributeValueController extends Controller
 
         // Валидация данных
         $validatedData = $request->validate([
-            'name' => 'required|max:20|unique:attribute_values,name', // Проверка уникальности для поля name
-            'slug' => 'nullable|unique:attribute_values,slug',         // Проверка уникальности для поля slug
+            'name' => [
+                'required',
+                'max:40',
+                Rule::unique('attribute_values')->where(fn($query) =>
+                $query->where('attribute_id', $request->attribute_id)
+                ),
+            ],
+            'slug' => [
+                'nullable',
+                Rule::unique('attribute_values')->where(fn($query) =>
+                $query->where('attribute_id', $request->attribute_id)
+                ),
+            ],
         ], $messages);
 
         // Генерируем slug его из name
@@ -42,6 +54,7 @@ class AttributeValueController extends Controller
 
         return redirect()->route('attribute.show', ['attribute' => $request->attribute_id])->with('success', 'Атрибут успішно доданий!');
     }
+
     public function edit($attribute_slug, $value_slug)
     {
         // Получаем атрибут по слагу
@@ -85,8 +98,6 @@ class AttributeValueController extends Controller
         return redirect()->route('attribute.show', ['attribute' => $attribute_id])->with('success', 'Атрибут успішно змінений!');
     }
 
-
-
     public function destroy($attr, $val) // Удаление значения атрибута
     {
 
@@ -97,4 +108,6 @@ class AttributeValueController extends Controller
         // Переадресация обратно к списку значений атрибута
         return redirect()->route('attribute.show', ['attribute' => $attr])->with('success', 'Значення атрибуту видалено!');
     }
+
+
 }

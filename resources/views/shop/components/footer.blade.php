@@ -123,6 +123,7 @@
 <script src="{{ asset('shop/js/nouislider.min.js')  }}"></script>
 <script src="{{ asset('shop/js/jquery.zoom.min.js')  }}"></script>
 <script src="{{ asset('shop/js/main.js')  }}"></script>
+@stack('scripts')
 
 </body>
 </html>
