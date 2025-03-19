@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -20,6 +21,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id); // Найти товар или вернуть 404
         return redirect()->route('admin.products.index')->with('success', 'Товар успешно обновлён');
     }
+
     public function index() //Вывод списка категорий
     {
         $products = Product::all();
@@ -27,6 +29,7 @@ class ProductController extends Controller
         return view('admin.products.products', compact('products'));
 
     }
+
     public function create() //Откытие странициа создания товара
     {
 
@@ -121,7 +124,6 @@ class ProductController extends Controller
     }
 
 
-
     public function edit($id) // Редактируем
     {
         // Загружаем товар с атрибутами и их значениями
@@ -147,7 +149,7 @@ class ProductController extends Controller
 
     public function update(Request $request, $id) //обновляем
     {
-        // Логируем все данные, отправленные в запросе
+
         Log::info('Данные формы для обновления:', $request->all());
 
         // Валидация данных
@@ -168,17 +170,28 @@ class ProductController extends Controller
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        // Получаем товар для обновления
-        $product = Product::findOrFail($id);
+        // После того как товар был сохранен
+        $product = Product::find($id);
 
-        // Обработка изображения
-        $imagePath = $product->image_url; // Оставляем старое, если новое не загружается
-        if ($request->hasFile('image')) {
-            // Удаляем старое изображение
-            if ($product->image_url) {
-                Storage::disk('public')->delete($product->image_url);
+// Привязка изображений (если они изменяются)
+        if ($request->hasFile('images')) {
+            // Удаление старых изображений (если необходимо)
+            $product->images()->delete();
+
+            // Сохранение новых изображений
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('products', 'public');
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_url' => $path,
+                    'type' => 'gallery',
+                ]);
             }
-            // Загружаем новое
+        }
+
+        $imagePath = $product->image_url;
+        if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('product_images', 'public');
         }
 
@@ -197,23 +210,14 @@ class ProductController extends Controller
             'visible' => $validated['visible'] ?? 0,
         ]);
 
-        // Удаляем изображения, если переданы ID на удаление
-        if ($request->has('deleted_images')) {
-            $deletedImages = explode(',', $request->input('deleted_images')); // Преобразуем строку в массив
-
-            foreach ($deletedImages as $imageId) {
-                $image = ProductImage::find($imageId);
-                if ($image) {
-                    Storage::disk('public')->delete($image->image_url);
-                    $image->delete();
-                }
-            }
-        }
-
-        // Загружаем новые изображения
+        // Обработка дополнительных изображений (если они есть)
         if ($request->hasFile('images')) {
+            // Удаляем старые изображения (если они были)
+            $product->images()->delete();
+
+            // Добавляем новые изображения
             foreach ($request->file('images') as $image) {
-                $path = $image->store('products', 'public');
+                $path = $image->store('product_images', 'public');
 
                 ProductImage::create([
                     'product_id' => $product->id,
@@ -244,7 +248,6 @@ class ProductController extends Controller
 
         }
 
-        // Возвращаем на страницу редактирования с сообщением об успехе
         return redirect()->route('product.index')->with('success', 'Товар успешно обновлён');
     }
 
@@ -266,6 +269,40 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('product.index')->with('success', 'Товар успешно удалён');
+    }
+
+    public function duplicate($productId)
+    {
+        // Находим оригинальный товар
+        $originalProduct = Product::findOrFail($productId);
+
+        // Создаем новый товар с такими же аттрибутами
+        $newProduct = $originalProduct->replicate(); // Копируем товар
+        $newProduct->name = $originalProduct->name . ' -copy'; // Добавляем суффикс -copy к названию
+        $newProduct->slug = Str::slug($newProduct->name); // Генерируем новый slug на основе нового названия
+        $newProduct->save(); // Сохраняем новый товар
+
+        // Копируем изображения
+        foreach ($originalProduct->images as $image) {
+            // Прописываем путь к изображению для нового товара
+            $newImagePath = $image->image_url;
+
+            // Создаем новый объект для изображения
+            ProductImage::create([
+                'product_id' => $newProduct->id, // Связываем с новым товаром
+                'image_url' => $newImagePath, // Путь к изображению
+                'type' => $image->type, // Тип изображения (если нужно)
+            ]);
+        }
+
+        // Копируем атрибуты и их значения для нового товара
+        foreach ($originalProduct->attributes as $attribute) {
+            $newProduct->attributes()->attach($attribute->pivot->attribute_id, [
+                'attribute_value_id' => $attribute->pivot->attribute_value_id
+            ]);
+        }
+
+        return redirect()->route('product.index')->with('success', 'Товар успешно скопирован');
     }
 
 

@@ -22,6 +22,7 @@
                                 <th>Ціна</th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -40,12 +41,20 @@
                                  <td><span class="out_stock">Немає в наявності</span></td>
                                  @endif
                                 <td> {{ $product['price'] }} грн </td>
-                                <td><a class="btn btn-warning fa fa-pencil-square-o" title="Редагувати" href="{{ route('product.edit', $product['id']) }}"></a> </td>
-                                <td><form action="{{ route('product.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Видалити товар?');">
+                                <td>
+                                    <a class="btn btn-warning fa fa-pencil-square-o" title="Редагувати" href="{{ route('product.edit', $product['id']) }}"></a> </td>
+                                <td>
+                                    <form action="{{ route('product.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Видалити товар?');">
                                         @csrf <!-- Токен безопасности -->
                                         @method('DELETE') <!-- Имитация DELETE-запроса -->
                                         <button class="btn btn-danger fa fa-times" title="Видалити" type="submit"></button>
-                                    </form></td>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="{{ route('product.duplicate', $product->id) }}" method="GET">
+                                        <button type="submit" title="Дублювати" class=" fa fa-copy btn btn-primary"></button>
+                                    </form>
+                                </td>
                             </tr>
                             @endforeach
                             </tbody>

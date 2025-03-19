@@ -138,6 +138,69 @@ textarea.input {
   -webkit-appearance: none;
   margin: 0;
 }
+.cart-button a{
+    display: inline-block;
+    width: calc(25% - 0px);
+    padding: 12px;
+    background-color: #D10024;
+    color: #FFF;
+    text-align: center;
+    font-weight: 700;
+    -webkit-transition: 0.2s all;
+    transition: 0.2s all;
+    border-radius: 5px;
+    float: right;
+}
+.card {
+    margin-bottom: 100px;
+}
+.card .table-bordered th{
+    text-align: center !important;
+}
+.card .table-bordered td{
+    text-align: center !important;
+    line-height: 100px;
+}
+
+.btn_qnt button {
+    background: transparent; /* Без фона */
+    border: none; /* Без рамки */
+    padding: 10px; /* Отступы, чтобы кнопка была удобной для клика */
+    cursor: pointer; /* Указатель при наведении */
+    font-size: 15px; /* Размер иконки */
+    color: #000; /* Цвет иконки */
+}
+
+.btn_qnt button:focus {
+    outline: none; /* Убираем обводку при фокусе */
+}
+
+/* Стили при наведении */
+.btn_qnt button:hover {
+    color: #007bff; /* Цвет иконки при наведении */
+}
+
+/* Дополнительные стили для кнопки decrease */
+.btn_qnt .decrease {
+    color: red; /* Например, красный для уменьшения */
+}
+
+/* Дополнительные стили для кнопки increase */
+.btn_qnt .increase {
+    color: green; /* Например, зеленый для увеличения */
+}
+.btn_qnt .quantity{
+    font-size: 15px;
+}
+
+.table-bordered .remove-item{
+    background: transparent; /* Без фона */
+    border: none; /* Без рамки */
+    padding: 10px; /* Отступы, чтобы кнопка была удобной для клика */
+    cursor: pointer; /* Указатель при наведении */
+    font-size: 20px; /* Размер иконки */
+    color: red;
+}
 
 .input-number input[type="number"] {
   -moz-appearance: textfield;
