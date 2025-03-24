@@ -141,7 +141,7 @@
                                 </div>
                                 <div class="cart-btns">
                                     <a href="{{ route('cart.show') }}">До Кошику</a>
-                                    <a href="#">Оформлення</a>
+                                    <a href="{{ route('checkout.checkout') }}">Оформлення</a>
                                 </div>
                             </div>
                         </div>

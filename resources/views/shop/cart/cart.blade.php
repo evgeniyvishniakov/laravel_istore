@@ -54,7 +54,7 @@
                                 </tbody>
                             </table>
                             <div class="cart-button">
-                                <a href="#">Оформлення замовлення</a>
+                                <a href="{{ route('checkout.checkout') }}">Оформлення замовлення</a>
                             </div>
                         </div>
                     </div>

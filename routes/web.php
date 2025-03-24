@@ -9,6 +9,8 @@ use App\Http\Controllers\shop\Auth\LoginController;
 use App\Http\Controllers\shop\Auth\RegisterController;
 use App\Http\Controllers\shop\Cart\CartController;
 use App\Http\Controllers\shop\Catalog\CatalogController;
+use App\Http\Controllers\shop\Checkout\CheckoutController;
+use App\Http\Controllers\shop\NovaPoshta\NovaPoshtaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Shop\Home\HomeController as ShopHomeController;
@@ -60,3 +62,10 @@ Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add')
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
 Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
 Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+
+// Чекаут
+Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout.checkout');
+Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
+Route::get('/nova-poshta/warehouses', [CheckoutController::class, 'getWarehouses']);
+Route::get('/get-cities', [CheckoutController::class, 'getCities']);
+Route::post('/warehouses', [CheckoutController::class, 'getWarehouses']);
